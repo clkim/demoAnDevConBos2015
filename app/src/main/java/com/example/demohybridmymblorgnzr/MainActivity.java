@@ -446,7 +446,7 @@ public class MainActivity extends Activity {
                 } catch (JSONException e) {
                     text = "";
                 }
-                mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null); // deprecated in API 21 but replacement crashes when run on 4.4.4
+                mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null, null); // new method signature in API 21 (Android 5.0)
 
                 mTextView.setText(text);
                 mTextView.setEllipsize(TruncateAt.MARQUEE);
