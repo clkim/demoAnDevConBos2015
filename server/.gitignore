@@ -1,0 +1,6 @@
+/db/mongod.lock
+/db/MyMobileOrganizer.*
+/db/journal/*
+/db/*.0
+/db/*.ns
+
