@@ -418,20 +418,19 @@ public class MainActivity extends Activity {
 
     private void fetchAndSayFirstNoteEntryInWebApp() {
         // demo how android can run javascript in webview: 1) fetch web app 'note' data, then 2) activate native app tts function
-        StringBuilder sb = new StringBuilder();
+        String jsStatements =
         // ajaxURLPrefix is http://127.0.0.1:8080, path is /note
         // ajax call should wait for response, then fire off ValueCallback with result obtained
-        sb.append("var jqXHR = $.ajax({ url: ajaxURLPrefix+'/note', async: false }); ");
-        sb.append("var resp = jqXHR.responseText; ");
-        // convert json text response to a JavaScript object as return value
-        sb.append("JSON.parse(resp); ");
-        String jsStatements = sb.toString();
+                "var jqXHR = $.ajax({ url: ajaxURLPrefix+'/note', async: false }); " +
+                "var resp = jqXHR.responseText; " +
+        // response is json text, not xml
+        // convert response to a JavaScript object as the result value to be received
+                "JSON.parse(resp); ";
         String js = String.format("javascript:%s", jsStatements);
 
         // onReceiveValue is always {"readyState":1} in logcat if ajax call is async
         mWebView.evaluateJavascript(js, new ValueCallback<String>() {
 
-            @SuppressWarnings("deprecation") // TextToSpeech.speak(String, int, HashMap) deprecated in API 21
             @Override public void onReceiveValue(String s) {
                 // not applicable for current implementation so for reference only:
                 //  single string json value is wrapped in quotes http://stackoverflow.com/questions/19788294/how-does-evaluatejavascript-work
@@ -441,7 +440,7 @@ public class MainActivity extends Activity {
                     // web app stores notes as array of json notation object literals
                     JSONArray allNotes = new JSONArray(s);
                     JSONObject firstNote = (JSONObject) allNotes.get(0);
-                    // property name for noteText value is 'text'
+                    // property name for note body is "text"
                     text = firstNote.getString("text");
                 } catch (JSONException e) {
                     text = "";
