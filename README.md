@@ -26,8 +26,8 @@ git config --global core.autocrlf true
 * Clone this repository to get your own local git repo at `[PathToGitRepoBase]/`
 * [Download Android Studio](https://developer.android.com/sdk/index.html) if you don't have it
 * In Android Studio > Configure > SDK Manager, install following if not installed
-** `Android 5.0.1 (API 21)` SDK Platform
-** `Tools` Android SDK Build-tools 21.1.2
+ * `Android 5.0.1 (API 21)` SDK Platform
+ * Tools `Android SDK Build-tools 21.1.2`
 * Go here to [Install Node.js](http://nodejs.org).
 * Go here to [Install MongoDB](http://docs.mongodb.org/manual/installation/).
 * Get MongoDB object modeling for Node.js by installing Mongoose module
@@ -38,19 +38,18 @@ npm install mongoose
 ##### Set up USB debugging
 * Connect up your smartphone to your host development computer using USB (see [Using Hardware Devices](http://developer.android.com/tools/device.html))
 * Set up remote debugging:
- * First do [Enable USB debugging on your Android device](https://developer.chrome.com/devtools/docs/remote-debugging#enable-usb-debugging)
- * On development Host machine, start Chrome browser (v39+), then do [Enable USB discovery in Chrome](https://developer.chrome.com/devtools/docs/remote-debugging#enable-usb-discovery)
- * Now, do [Connect your device via USB](https://developer.chrome.com/devtools/docs/remote-debugging#connect-device-via-usb)
+ * First do [Setting up your Android device - Enable USB debugging](https://developer.chrome.com/devtools/docs/remote-debugging#enable-usb-debug)
+ * On development Host machine, start Chrome browser (v39+), then do [Discovering devices in Chrome](https://developer.chrome.com/devtools/docs/remote-debugging#discovering-devices) to Discover USB devices conected to the Host development machine
  * At this point, we should see on Host browser's `chrome://inspect` page, the Android device, e.g. Nexus 4, listed in Devices
 
-##### In Eclipse ADT
-* Create a new project by doing `File > Import > Existing Android Code into Workspace > Root directory: [PathToGitRepoBase]/demoHybridMyMblOrgnzr > Open > Finish` (don't import as existing projects into workspace)
-* In project (default project name given by Eclipse is MainActivity; can change with Refactor > Rename...) `Properties > Android > in Project Build Target` we have specified the current Android platform Android 5.0 or API Level 21. Use `Window > Android SDK Manager` to download the required SDK platform. (Note that this Project Build Target can be same or later than the `android:targetSdkVersion` specified in the `AndroidManifest.xml` file.)
-* There should be no build errors for the project at this point. If there is, try checking project's `Properties > Java Build Path`
+##### In Android Studio
+* Open the demo app project `File > Open > directory: [PathToGitRepoBase]/demoHybridMyMblOrgnzr20nn > Choose` (don't import as existing projects with File > New > Import Project...)
+* In app/build.gradle file, we have specified compileSdkVersion 21, minSdkVersion 21, targetSdkVersion 21 i.e. Android 5 or API Level 21. Use `Tools > Android > SDK Manager` to download any needed SDK platform. (Note that minSdkVersion and targetSdkVersion values appear to override the corresponding values specified in the `AndroidManifest.xml` file.)
+* There should be no build errors for the project at this point.
 * At this point, we should be able to run the demo app on the Android device, but until the rest of the setup steps are done, be aware that the app will show an error Alert popup displaying some json object values such as `XHR:{"readyState":0...` as well as a `No Network Connection` error Dialog. But to verify that the demo app runs:
- * Right-click on this project name `(MainActivity) > Run As > Android Application > Choose a running Android device: pick your Android device > OK`
+ * Run > Run 'app' > Choose a running Android device: pick your 'Online' Android 5 device > OK
  * Dismiss the error Alert (it should self dismiss) and the error Dialog
- * See the demo app's main activity screen, comprising a WebView occupying most of the screen, two bar-buttons at the bottom of the screen, and an empty TextView immediately above them.
+ * See the demo app's main activity screen, comprising a WebView occupying most of the screen, two bar-buttons at the bottom of the screen, and an empty single line TextView immediately above them.
 
 ##### Run backend for the web app portion of the demo app
 The backend processes *MUST be run in the following order* (see `./server/run.bat` for Windows)
