@@ -22,6 +22,8 @@ git config --global core.autocrlf true
 
 #### Steps to run demo app
 
+<img src="screenshot.png" width="240" height="420" />
+
 ##### Downloads and installation
 * Clone this repository to get your own local git repo at `[PathToGitRepoBase]/`
 * [Download Android Studio](https://developer.android.com/sdk/index.html) if you don't have it
